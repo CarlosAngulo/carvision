@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
-import { SalesGateway } from '../domain/sales-gateway';
+import { SalesGateway } from '../../domain/sales-gateway';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs';
 

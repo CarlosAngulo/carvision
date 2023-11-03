@@ -1,0 +1,58 @@
+<div class="mb-6 flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
+    <div class="flex w-full items-center gap-4 sm:w-auto">
+        <div
+            class="flex items-center justify-center gap-2 bg-white border border-solid border-gray-300 px-3 rounded-md w-full sm:w-auto">
+            <span class="material-symbols-outlined">search</span>
+            <input class="py-2 outline-none flex-grow" type="text" placeholder="Filter users..." value="">
+        </div>
+    </div>
+    <div class="flex w-full items-center justify-end gap-4 sm:w-auto">
+        <button type="button" rel="" target="" class="flex gap-2 rounded-md bg-violet-500 w-full py-2 px-4 text-white">
+            <span class="material-symbols-outlined">add</span>
+            <span class="whitespace-nowrap">New Report</span>
+        </button>
+    </div>
+</div>
+
+<table class="divide-muted-200 dark:divide-muted-700 min-w-full table-fixed divide-y">
+    <thead>
+        <tr>
+            <th *ngFor="let header of tableHeaders"
+                class="text-muted-700 dark:text-muted-400 text-center font-sans font-semibold tracking-wider text-xs uppercase border-muted-200 dark:border-muted-700 last:border-e-none dark:bg-muted-800 border-r bg-white px-4 py-5">
+                {{ header }}
+            </th>
+        </tr>
+    </thead>
+    <tbody class="divide-muted-200 dark:divide-muted-700 dark:bg-muted-800 divide-y bg-white">
+        <tr class="hover:bg-muted-50 dark:hover:bg-muted-900 transition-colors duration-300"
+            *ngFor="let report of reports; let i = index">
+            <td class="whitespace-nowrap text-sm text-muted-500 dark:text-white p-4">
+                {{ report.client }}
+            </td>
+            <td class="whitespace-nowrap text-sm text-muted-500 dark:text-white p-4">
+                <app-dropdown [items]="salesPeople" [legend]="'Sales person'"
+                    (onSelectedItem)="onSelectSalesPerson($event, i)"></app-dropdown>
+            </td>
+            <td class="whitespace-nowrap text-sm text-muted-800 dark:text-white p-4 capitalize text-center">
+                <app-dropdown [items]="booleanDropOptions" [legend]="booleanDropOptions[0]"
+                    (onSelectedItem)="onSelectPicture($event, i, 'picture')"></app-dropdown>
+            </td>
+            <td class="p-4 flex justify-center">
+                <input type="text" class="reports-input w-20 text-right">
+            </td>
+            <td class="whitespace-nowrap text-sm text-muted-800 dark:text-white p-4 text-center">
+                <app-dropdown [items]="booleanDropOptions" [legend]="'--'"
+                    (onSelectedItem)="onSelectPicture($event, i, 'picture')"></app-dropdown>
+            </td>
+            <td class="whitespace-nowrap text-sm text-muted-800 dark:text-white p-4 text-center">
+                {{ report.rating }}
+            </td>
+            <td class="whitespace-nowrap text-sm text-muted-800 dark:text-white p-4 text-center">
+                {{ report.submitted }}
+            </td>
+            <td class="whitespace-nowrap text-sm text-muted-800 dark:text-white p-4 text-center">
+                {{ report.platform }}
+            </td>
+        </tr>
+    </tbody>
+</table>

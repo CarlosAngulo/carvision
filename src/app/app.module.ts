@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { ReportsGateway } from './api/domain/reports-gateway';
-import { ReportsFirebaseService } from './api/infraestructure/reports-firebase.service';
-import { ReportsComponent } from './pages/reports/reports.component';
+import { ReportsFirebaseService } from './api/infraestructure/firebase/reports-firebase.service';
 import { SalesGateway } from './api/domain/sales-gateway';
-import { SalesFirebaseService } from './api/infraestructure/sales-firebase.service';
+import { SalesFirebaseService } from './api/infraestructure/firebase/sales-firebase.service';
+import { LoginComponent } from './auth/login/login.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginGateway } from './auth/login/domain/login-gateway';
+import { LoginFirebaseService } from './auth/login/infraestructure/firebase/login.service';
+import { MagicLinkComponent } from './auth/magic-link/magic-link.component';
+import { AccountComponent } from './pages/profile/account/account.component';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,20 +35,45 @@ const firebaseConfig = {
   measurementId: "G-BP27FV3BPC"
 };
 
+const firebaseConfigLaia = {
+  apiKey: "AIzaSyAQ2ju-FJ5d-Y-4Qwv9OeX7wg4YL497m1U",
+  authDomain: "car-sales-2369a.firebaseapp.com",
+  projectId: "car-sales-2369a",
+  storageBucket: "car-sales-2369a.appspot.com",
+  messagingSenderId: "248883482614",
+  appId: "1:248883482614:web:032699924e6232bff801d7",
+  measurementId: "G-X2VFZ3X5ZN"
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReportsComponent
+    MagicLinkComponent,
+    LoginComponent,
+    AppComponent,
+    AccountComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {
@@ -51,6 +83,10 @@ const analytics = getAnalytics(app);
     {
       provide: SalesGateway,
       useClass: SalesFirebaseService
+    },
+    {
+      provide: LoginGateway,
+      useClass: LoginFirebaseService
     }
   ],
   bootstrap: [AppComponent]
@@ -73,5 +109,4 @@ export class AppModule { }
 // firebase deploy
 // Después de la implementación, consulta tu app en car-sales-1dcac.web.app.
 
-// ¿Necesitas ayuda? Consulta los documentos de Hosting.
 

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { ReportsGateway } from "../domain/reports-gateway";
+import { ReportsGateway } from "../../domain/reports-gateway";
 import { AngularFirestore, DocumentReference, DocumentData } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 

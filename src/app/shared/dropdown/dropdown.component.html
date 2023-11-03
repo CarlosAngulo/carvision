@@ -1,0 +1,13 @@
+<div class="dropdown" [class.open]="open">
+    <div class="dropdown-box" (click)="onDropDown()">
+        {{ defaulText }}
+        <span class="dropdown-caret material-symbols-outlined">
+            arrow_drop_down
+        </span>
+    </div>
+    <ul class="dropdown-list" *ngIf="open">
+        <li class="dropdown-item" *ngFor="let item of items; let i = index" (click)="onItemClick(i)">
+            {{ item.text }}
+        </li>
+    </ul>
+</div>

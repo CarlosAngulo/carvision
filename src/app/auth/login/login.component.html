@@ -1,0 +1,53 @@
+<div class="login flex flex-col justify-center items-center">
+    <h1>Welcome to ...</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="bg-white flex flex-col">
+        <h3>Login</h3>
+        <div class="flex flex-col gap-2 mb-4">
+            <label htmlFor="email">
+                {{'login.fields.email' | translate}}
+            </label>
+            <input
+                type="text"
+                formControlName="email"
+                aria-labelledby="Your email"
+                required
+            />
+            <small
+                *ngIf="fieldNames && emailFieldStatus"
+                [class.p-error]="emailFieldStatus.error"
+                [translate]="emailFieldStatus.message"
+                [translateParams]="{value: fieldNames['login.fields.email']}">
+            </small>
+        </div>
+        <div class="flex flex-col gap-2 mb-4">
+            <label htmlFor="password">
+                {{'login.fields.password' | translate}}
+            </label>
+            <input
+                type="password"
+                formControlName="password"
+                aria-labelledby="Your password"
+                required
+            />
+            <small
+                *ngIf="fieldNames"
+                [class.p-error]="passwordFieldStatus.error"
+                [translate]="passwordFieldStatus.message"
+                [translateParams]="{value: fieldNames['login.fields.password']}">
+            </small>
+        </div>
+        
+        <div *ngIf="loginResponse" class="mt-4 p-3" [class]="'login__' + loginResponse">
+            {{'login.messages.login_' + loginResponse | translate}}
+        </div>
+
+        <button
+            type="submit"
+            type="submit"
+            [disabled]="!loginForm.valid"
+            class="bg-violet-500 text-white">
+            Submit
+        </button>
+
+    </form>
+</div>

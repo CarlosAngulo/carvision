@@ -1,0 +1,16 @@
+<div class="mb-6 flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
+    <div class="flex w-full items-center gap-4 sm:w-auto">
+        <div class="flex items-center justify-center gap-2 bg-white border border-solid border-gray-300 px-3 rounded-md w-full sm:w-auto">
+            <span class="material-symbols-outlined">search</span>
+            <input class="py-2 outline-none flex-grow" type="text" placeholder="Filter users..." value="">
+        </div>
+    </div>
+    <div class="flex w-full items-center justify-end gap-4 sm:w-auto">
+        <button type="button" rel="" target="" class="flex gap-2 rounded-md bg-violet-500 w-full sm:w-36 py-2 px-4 text-white">
+            <span class="material-symbols-outlined">add</span>
+            <span class="whitespace-nowrap">Add User</span>
+        </button>
+    </div>
+</div>
+
+<app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
