@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+export interface IMenuItems {
+  text?: string,
+  link: string,
+  icon?: string,
+}
 
 @Component({
   selector: 'app-menu',
@@ -7,4 +13,7 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
 
+  @Input() items!: IMenuItems[]
+
+  constructor() {}
 }

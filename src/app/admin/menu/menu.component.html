@@ -1,15 +1,11 @@
-<ul class="flex md:flex-col flex-row gap-2 text-white">
-    <li>
-        <a [routerLink]="'users'" class="flex p-2">
-            <span class="material-symbols-outlined">
-                group
+<ul class="menu flex md:flex-col flex-row gap-2 text-white">
+    <li class="menu-item" *ngFor="let item of items">
+        <a [routerLink]="item.link" class="flex p-2 menu-item-link" routerLinkActive="active">
+            <span class="menu-item-icon material-symbols-outlined" *ngIf="item.icon">
+                {{item.icon}}
             </span>
-        </a>
-    </li>
-    <li>
-        <a [routerLink]="'reports'" class="flex p-2">
-            <span class="material-symbols-outlined">
-                table_chart
+            <span class="menu-item-text" *ngIf="item.text">
+                {{item.text}}
             </span>
         </a>
     </li>

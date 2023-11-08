@@ -18,23 +18,30 @@
         background-color: white;
         z-index: 1000;
         margin-top: 2px;
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
     }
     &-item {
         border-bottom: 1px solid #EEE;
         padding: 6px 12px;
+        user-select: none;
         &:last-child {
             border-bottom: medium none;
         }
-        &:hover {
+        &:hover, &.selected {
             background-color: #EEE;
         }
     }
     &-caret {
         transition: transform 0.2s ease;
+        user-select: none
     }
     &.open { 
         .dropdown-caret {
             transform: rotate(180deg);
         }
+    }
+    &-input {
+        outline: none;
+        flex-grow: 1;
     }
 }

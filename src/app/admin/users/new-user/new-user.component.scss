@@ -1,0 +1,30 @@
+.new-user {
+    border: 1px dashed #CCC;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    background-color: #d3e0eb;
+    margin-bottom: 4px;
+
+    &-title {
+        font-size: 26px;
+        margin-bottom: -20px;
+    }
+
+    &-label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    &-input {
+        border: 1px solid #CCC;
+        background-color: white;
+        border-radius: 4px;
+        padding: 6px;
+        width: 100%;
+        &.ng-invalid {
+            border-color: red;
+        }
+        &.ng-pristine {
+            border: 1px solid #CCC;
+        }
+    }
+}

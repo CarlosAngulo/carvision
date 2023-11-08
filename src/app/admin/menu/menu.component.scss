@@ -1,10 +1,18 @@
-// ul {
-//     list-style: none;
-//     display: flex;
-//     gap: 20px;
-//     justify-content: flex-start;
-// }
 
-.material-symbols-outlined {
-    font-size: 28px;
+.menu {
+    &-item {
+        &-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        &-icon {
+            color: #598ae5;
+            font-size: 28px;
+        }
+        .active .menu-item-icon {
+            color: #4be4ff;;
+        }
+    }
 }

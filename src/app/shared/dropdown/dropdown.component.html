@@ -1,12 +1,24 @@
-<div class="dropdown" [class.open]="open">
+<div
+    (keyup)="onKeyDown($event)"
+    class="dropdown"
+    [class.open]="open">
     <div class="dropdown-box" (click)="onDropDown()">
-        {{ defaulText }}
+        <input
+            type="text"
+            [value]="outputText"
+            class="dropdown-input"
+            (input)="onInputChange($event)">
         <span class="dropdown-caret material-symbols-outlined">
             arrow_drop_down
         </span>
     </div>
     <ul class="dropdown-list" *ngIf="open">
-        <li class="dropdown-item" *ngFor="let item of items; let i = index" (click)="onItemClick(i)">
+        <li
+            class="dropdown-item"
+            *ngFor="let item of filterdItems; let i = index"
+            [class.selected] = "itemIndexHover === i"
+            (mouseover)= "onItemHover($event, i)"
+            (click)="onItemClick(i)">
             {{ item.text }}
         </li>
     </ul>

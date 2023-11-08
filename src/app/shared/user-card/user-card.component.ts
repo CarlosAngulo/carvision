@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { IUserDTO } from 'src/app/auth/models/user.model';
 
 export interface IUserData {
   name: string;
   role: string;
   location: string;
-  score: number;
+  email: string;
+  id: string
 }
 
 @Component({
@@ -13,6 +15,6 @@ export interface IUserData {
   styleUrls: ['./user-card.component.scss']
 })
 export class UserCardComponent {
-  @Input() user!: IUserData;
+  @Input() user!: IUserDTO;
 
 }

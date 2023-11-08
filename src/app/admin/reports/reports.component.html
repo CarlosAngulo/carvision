@@ -1,10 +1,10 @@
+<div class="header">
+    <h2>Reports</h2>
+</div>
+
 <div class="mb-6 flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
     <div class="flex w-full items-center gap-4 sm:w-auto">
-        <div
-            class="flex items-center justify-center gap-2 bg-white border border-solid border-gray-300 px-3 rounded-md w-full sm:w-auto">
-            <span class="material-symbols-outlined">search</span>
-            <input class="py-2 outline-none flex-grow" type="text" placeholder="Filter users..." value="">
-        </div>
+        
     </div>
     <div class="flex w-full items-center justify-end gap-4 sm:w-auto">
         <button type="button" rel="" target="" class="flex gap-2 rounded-md bg-violet-500 w-full py-2 px-4 text-white">
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<table class="divide-muted-200 dark:divide-muted-700 min-w-full table-fixed divide-y">
+<table class="divide-muted-200 dark:divide-muted-700 min-w-full table-fixed divide-y mb-5">
     <thead>
         <tr>
             <th *ngFor="let header of tableHeaders"
@@ -30,19 +30,31 @@
                 {{ report.client }}
             </td>
             <td class="whitespace-nowrap text-sm text-muted-500 dark:text-white p-4">
-                <app-dropdown [items]="salesPeople" [legend]="'Sales person'"
-                    (onSelectedItem)="onSelectSalesPerson($event, i)"></app-dropdown>
+                <app-dropdown
+                    [items]="salesPeople"
+                    [legend]="'Sales person'"
+                    [selectedOption]="report.salesPerson"
+                    (onSelectedItem)="onSelectSalesPerson($event, i)">
+                </app-dropdown>
             </td>
             <td class="whitespace-nowrap text-sm text-muted-800 dark:text-white p-4 capitalize text-center">
-                <app-dropdown [items]="booleanDropOptions" [legend]="booleanDropOptions[0]"
-                    (onSelectedItem)="onSelectPicture($event, i, 'picture')"></app-dropdown>
+                <app-dropdown
+                    [items]="booleanDropOptions"
+                    [legend]="booleanDropOptions[0]"
+                    [selectedOption]="report.picture"
+                    (onSelectedItem)="onSelectPicture($event, i, 'picture')">
+                </app-dropdown>
             </td>
             <td class="p-4 flex justify-center">
-                <input type="text" class="reports-input w-20 text-right">
+                <input type="number" class="reports-input w-20 text-right">
             </td>
             <td class="whitespace-nowrap text-sm text-muted-800 dark:text-white p-4 text-center">
-                <app-dropdown [items]="booleanDropOptions" [legend]="'--'"
-                    (onSelectedItem)="onSelectPicture($event, i, 'picture')"></app-dropdown>
+                <app-dropdown
+                    [items]="booleanDropOptions"
+                    [legend]="'--'"
+                    [selectedOption]="report.positive"
+                    (onSelectedItem)="onSelectPicture($event, i, 'positive')">
+                </app-dropdown>
             </td>
             <td class="whitespace-nowrap text-sm text-muted-800 dark:text-white p-4 text-center">
                 {{ report.rating }}
@@ -56,3 +68,5 @@
         </tr>
     </tbody>
 </table>
+
+<app-pagination [pages]="3" (onPageChange)="onPageChange($event)"></app-pagination>

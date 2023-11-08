@@ -7,6 +7,8 @@ import { Subject, catchError, of, takeUntil } from 'rxjs';
 import { LoginGateway } from './domain/login-gateway';
 import { FieldMessagesService } from './services/field-message.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { login } from '../state/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +31,8 @@ export class LoginComponent {
     private errorMessageService: FieldMessagesService,
     private translateService: TranslateService,
     private loginService: LoginGateway,
-    private router: Router
+    private router: Router,
+    private store: Store<{lang: string, auth: any}>
   ) {
     translateService.addLangs(['en', 'es']);
     translateService.setDefaultLang('en'); 
@@ -42,7 +45,7 @@ export class LoginComponent {
     });
 
     const emailField = this.loginForm.controls['email'];
-    emailField.setValue('carlos@angulo.com');
+    emailField.setValue('patricia@example.com');
 
     emailField.valueChanges
     .pipe(takeUntil(this.unsubscribe$))
@@ -51,7 +54,7 @@ export class LoginComponent {
     });
 
     const passwordField = this.loginForm.controls['password'];
-    passwordField.setValue('123456');
+    passwordField.setValue('QAZSE123');
     this.passwordFieldStatus = this.errorMessageService.getDefaultMessage();
 
     passwordField.valueChanges
@@ -80,9 +83,10 @@ export class LoginComponent {
       )
       .subscribe((userData) => {
         console.log(userData)
-        if(userData.user?.uid) {
+        if(userData.user?.role === 'admin') {
           this.loginResponse = 'correct';
           this.onAuenticateUser.emit(userData);
+          this.store.dispatch(login({user:userData}))
           this.router.navigate(['admin/users'])
           return;
         }

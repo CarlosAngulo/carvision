@@ -18,13 +18,15 @@ export class ReportsComponent {
 
   salesPeople: IDropDownOption[] = [
     { text: 'Carlos', value: 'Carlos'},
-    { text: 'Adriana', value: 'Adriana'}
+    { text: 'Adriana', value: 'Adriana'},
+    { text: 'Michael', value: 'Michael'},
+    { text: 'Adr', value: 'Adr'}
   ];
 
   reports = [
     {
       client: "Craig Coburn",
-      salesPerson: "James Silcox",
+      salesPerson: "Adriana",
       picture: true,
       paid: true,
       positive: true,
@@ -50,6 +52,10 @@ export class ReportsComponent {
 
   onSelectPicture(event: IDropDownOption, index: number, column: string): void {
     console.log(event, index, column)
+  }
+
+  onPageChange(page: number) {
+    console.log(page)
   }
 
 }
